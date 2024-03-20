@@ -1,14 +1,27 @@
-// models/comment.js
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-module.exports = (sequelize) => {
-  const Comment = sequelize.define('Comment', {
-    content: {
-      type: DataTypes.TEXT,
+class Comment extends Model {}
+
+Comment.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    body: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    // Add other comment-related fields as needed
-  });
+  },
+  {
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'comment',
+  }
+);
 
-  return Comment;
-};
+module.exports = Comment;
