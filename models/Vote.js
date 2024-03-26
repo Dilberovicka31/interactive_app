@@ -1,29 +1,32 @@
-// // models/vote.js
-// const { DataTypes, Model } = require('sequelize');
-// const sequelize = require('../config/connection.js');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-// class Vote extends Model {}
-
-// Vote.init(
-//   {
-
-//     // A vote can be either an upvote (1) or downvote (-1)
-//     value: {
-//       type: DataTypes.INTEGER,
-//       allowNull: false,
-//       validate: {
-//         isIn: [[1, -1]],
-//       },
-//     },
-//     // Add other vote-related fields as needed
+class Vote extends Model {}
+Vote.init (
+        {
+          id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true,
+          },
+          type: {
+            type: DataTypes.ENUM('upvote', 'downvote'),
+            allowNull: false,
+          },
+        },
+        {
+          sequelize,
+          modelName: 'vote',
+          timestamps: true,
+          updatedAt: false,
+        }
+      );
    
-//   },
-//    {
-//       sequelize,
-//       freezeTableName: true,
-//       underscored: true,
-//       modelName: 'vote',
-//     }
-//   );
+    
 
-// module.exports = Vote;
+
+  
+
+
+module.exports = Vote;
