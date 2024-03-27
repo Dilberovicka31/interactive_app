@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     
        console.log(posts);
     
-        // res.render('all-posts', { posts });
+        res.render('homepage', { posts });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
