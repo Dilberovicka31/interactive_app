@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     
        console.log(posts);
     
-        res.render('homepage', { posts });
+        res.render('homepage', { posts, loggedIn: req.session.logged_in});
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -32,7 +32,7 @@ router.get('/post/:id', async (req, res) => {
     
         const post = postData.get({ plain: true });
     
-        res.render('single-post', { post });
+        res.render('single-post', { post, loggedIn: req.session.logged_in });
     } catch (err) {
         res.status(500).json(err);
     }
@@ -41,15 +41,18 @@ router.get('/post/:id', async (req, res) => {
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
+        console.log('logged in');
         res.redirect('/');
         return;
     }
     res.render('login');
-    }                       
+    }  
+                  
 );
 
 router.get('/signup', (req, res) => {
     if (req.session.loggedIn) {
+        
         res.redirect('/');
         return;
     }
