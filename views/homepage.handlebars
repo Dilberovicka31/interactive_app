@@ -1,11 +1,4 @@
-{{!-- add a link to add a new post --}}
-<div class="d-flex justify-content-center">
-  <a class="" href="/dashboard/new">Add new post
-      <span class="material-symbols-outlined">
-        post_add
-      </span>
-    </a>
-</div>
+
 
 
 <div class="container text-center p-3">
@@ -14,10 +7,15 @@
     <div class="col-6 p-3">
       <div class="card">
         <div class="card-body">
+           <i class="fa-regular fa-pen-to-square d-flex justify-content-end editBtn"></i>
           <h5 class="card-title">{{title}}</h5>
           <p class="card-text">{{body}}</p>
          <p class="card-text">Posted by {{user.username}}</p>
-          <a href="/posts/{{id}}" class="btn btn-dark">Leave a comment</a>
+         <a href="/posts/{{id}}" class="commentBtn btn btn-dark">Leave a
+              comment</a>
+            <i
+              class="fa-regular fa-trash-can mb-2 d-flex justify-content-end"
+            ></i>
         </div>
       </div>
     </div>
