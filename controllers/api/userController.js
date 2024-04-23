@@ -1,5 +1,7 @@
 const {User} = require('../../models');
 const router = require('express').Router();
+const transporter = require('../../config/nodemailer'); 
+
 
 
 //CREATE USER
@@ -72,6 +74,34 @@ router.post('/logout', (req, res) => {
     }
     });
 
-    
+    router.post('forgot-password', async (req, res) => {
+       const {email} = req.body;
+
+       try {
+        const user = await User.findOne({where: {email}});
+        if (!user) {
+            return res.status(400).json({message: 'No user with that email address'});
+        }
+        const resetToken = user.getResetToken();
+        await user.save();
+
+        const resetUrl = `http://localhost:3000/reset/${resetToken}`;
+        const message = {
+            to: email,
+            subject: 'Password Reset Request',
+            text: `Click this link to reset your password: ${resetUrl}`
+        };
+        await transporter.sendMail(message);
+        res.status(200).json({message: 'Email sent'});
+
+       }
+       catch (err) {
+          console.error(err);
+          res.status(500).json({message: 'Failed to send reset email'});
+       }
+    }
+    );
+
+
 
 module.exports = router;
