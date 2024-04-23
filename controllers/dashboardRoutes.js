@@ -19,11 +19,13 @@ router.get("/", withAuth, async (req, res) => {
         posts
         });
     } catch (err) {
+        console.log(err);
         res.redirect("login");
     }
     });
 
-router.get("/new", withAuth, (req, res) => {
+router.get("/new", withAuth, (req, res,err) => {
+    console.log(err)
     res.render("newPost");
     }
     
