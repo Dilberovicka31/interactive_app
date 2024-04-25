@@ -17,6 +17,9 @@ class User extends Model {
     this.resetTokenExpiration = Date.now() + 3600000; // Token expires in 1 hour
     return token;
   }
+  getResetToken() {
+    return this.resetToken;
+  }
 
   // Method to check if the reset token is valid
   isResetTokenValid() {

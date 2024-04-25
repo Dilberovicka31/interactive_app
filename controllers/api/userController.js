@@ -1,6 +1,43 @@
-const {User} = require('../../models');
+const { User } = require('../../models/');
 const router = require('express').Router();
-const transporter = require('../../config/nodemailer'); 
+const { generateResetToken, sendResetEmail, verifyResetToken, updatePassword } = require('../../utils/passwordReset');
+
+// Route to handle forgot password request
+router.post('/forgot-password', async (req, res) => {
+    const { email } = req.body;
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return res.status(400).json({ message: 'No user with that email address' });
+        }
+        const resetToken = await generateResetToken(user.id);
+        await sendResetEmail(email, resetToken);
+        res.status(200).json({ message: 'Email sent' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to send reset email' });
+    }
+});
+
+// Route to handle reset password request
+router.post('/reset-password', async (req, res) => {
+    const { userId, token, newPassword } = req.body;
+    try {
+        const isValidToken = await verifyResetToken(userId, token);
+        if (!isValidToken) {
+            return res.status(400).json({ message: 'Invalid or expired reset token' });
+        }
+        await updatePassword(userId, newPassword);
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to reset password' });
+    }
+});
+
+
+
+
 
 
 
@@ -74,34 +111,29 @@ router.post('/logout', (req, res) => {
     }
     });
 
-    router.post('forgot-password', async (req, res) => {
-       const {email} = req.body;
-
-       try {
-        const user = await User.findOne({where: {email}});
-        if (!user) {
-            return res.status(400).json({message: 'No user with that email address'});
-        }
-        const resetToken = user.getResetToken();
-        await user.save();
-
-        const resetUrl = `http://localhost:3000/reset/${resetToken}`;
-        const message = {
+    router.post('/forgot-password', async (req, res) => {
+        const { email } = req.body;
+      
+        try {
+          const user = await User.findOne({ where: { email } });
+          if (!user) {
+            return res.status(400).json({ message: 'No user with that email address' });
+          }
+          const resetToken = user.generateResetToken(); // Call the method to generate reset token
+          await user.save();
+      
+          const resetUrl = `http://localhost:3001/reset/${resetToken}`;
+          const message = {
             to: email,
             subject: 'Password Reset Request',
-            text: `Click this link to reset your password: ${resetUrl}`
-        };
-        await transporter.sendMail(message);
-        res.status(200).json({message: 'Email sent'});
-
-       }
-       catch (err) {
+            text: `Click this link to reset your password: ${resetUrl}`,
+          };
+          await transporter.sendMail(message); // Use the nodemailer transporter to send the email
+          res.status(200).json({ message: 'Email sent' });
+        } catch (err) {
           console.error(err);
-          res.status(500).json({message: 'Failed to send reset email'});
-       }
-    }
-    );
-
-
-
+          res.status(500).json({ message: 'Failed to send reset email' });
+        }
+      });
+      
 module.exports = router;
