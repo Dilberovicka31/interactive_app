@@ -66,8 +66,19 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
+  background-color: #C5C1C0 !important;
 }
 
+.image-container {
+  display: inline-block;
+  border-radius: 10px; /* Optional: Adds rounded corners to the image container */
+  overflow: hidden; /* Optional: Clips the shadow to the image container */
+  box-shadow: 0 0 20px #F7CE3E; /* Adds a yellow shadow to the image */
+}
+
+.steel{
+
+}
 /*
 1. Add the correct height in Firefox.
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
