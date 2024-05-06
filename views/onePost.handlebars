@@ -1,0 +1,23 @@
+ <h1>{{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+
+    <!-- Display Comments -->
+    <div>
+        <h2>Comments</h2>
+        {{#each post.comments}}
+            <div>
+                <p>{{ this.comment_text }}</p>
+                <p>Commented by: {{ this.User.username }}</p>
+            </div>
+        {{/each}}
+    </div>
+
+    <!-- Form to Add a New Comment -->
+    <form id="commentForm" action="/posts/{{ post.id }}" method="POST">
+        <textarea id="commentText" name="commentText" placeholder="Add your comment"></textarea>
+        <input type="hidden" id="postId" name="postId" value="{{ post.id }}"> <!-- Add a hidden input for post ID -->
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Include JavaScript file -->
+    <script src="/js/comment.js"></script>

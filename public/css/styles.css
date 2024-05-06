@@ -66,17 +66,53 @@ body {
   /* 1 */
   line-height: inherit;
   /* 2 */
-  background-color: #C5C1C0 !important;
+  background: rgb(118,117,116);
+background: linear-gradient(90deg, rgba(118,117,116,1) 0%, rgba(204,200,198,1) 24%, rgba(251,247,246,1) 100%);
+ 
+
+}
+
+.image-cont {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-cont img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.7; /* Adjust opacity as needed */
+  transition: opacity 0.3s ease;
+}
+
+.image-cont img:hover {
+  opacity: 1;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px; /* Adjust font size */
+  opacity: 0.9; /* Adjust opacity as needed */
 }
 
 .image-container {
   display: inline-block;
-  border-radius: 10px; /* Optional: Adds rounded corners to the image container */
-  overflow: hidden; /* Optional: Clips the shadow to the image container */
-  box-shadow: 0 0 20px #F7CE3E; /* Adds a yellow shadow to the image */
+  border-radius: 10px; /* rounded corners to the image container */
+  overflow: hidden; /*  Clips the shadow to the image container */
+  box-shadow: 0 0 20px #c7d8c6; 
 }
 
 .steel{
+  background-color: #0a1612;
+
+}
+.minty{
+
+
 
 }
 /*
