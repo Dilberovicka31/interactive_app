@@ -46,13 +46,7 @@ html,
   -o-tab-size: 4;
   tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* 4 */
-  font-feature-settings: normal;
-  /* 5 */
-  font-variation-settings: normal;
-  /* 6 */
-  -webkit-tap-highlight-color: transparent;
+
   /* 7 */
 }
 
@@ -62,6 +56,7 @@ html,
 */
 
 body {
+  font-family: roboto, sans-serif;
   margin: 0;
   /* 1 */
   line-height: inherit;
@@ -72,33 +67,25 @@ background: linear-gradient(90deg, rgba(118,117,116,1) 0%, rgba(204,200,198,1) 2
 
 }
 
-.image-cont {
-  position: relative;
-  overflow: hidden;
-}
-
-.image-cont img {
-  display: block;
-  width: 100%;
-  height: auto;
-  opacity: 0.7; /* Adjust opacity as needed */
-  transition: opacity 0.3s ease;
-}
-
-.image-cont img:hover {
-  opacity: 1;
-}
-
-.overlay-text {
+.carousel-text {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
-  font-size: 20px; /* Adjust font size */
-  opacity: 0.9; /* Adjust opacity as needed */
+  z-index: 10;
+  color: white; /* Text color */
 }
 
+/* Overlay container */
+.carousel-overlay {
+  position: relative;
+}
+
+/* Set opacity for images */
+.carousel-item img {
+  opacity: 0.7; 
+  border-radius: 10px;/* Adjust the opacity value as needed */
+}
 .image-container {
   display: inline-block;
   border-radius: 10px; /* rounded corners to the image container */
@@ -114,6 +101,15 @@ background: linear-gradient(90deg, rgba(118,117,116,1) 0%, rgba(204,200,198,1) 2
 
 
 
+}
+
+.scrollArrow{
+  position: fixed;
+  bottom: 20px; /* Adjust the distance from the bottom as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px; 
+  color: white;
 }
 /*
 1. Add the correct height in Firefox.
