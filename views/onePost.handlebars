@@ -1,23 +1,35 @@
- <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p>
+<!-- Display post content -->
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
 
-    <!-- Display Comments -->
-    <div>
-        <h2>Comments</h2>
-        {{#each post.comments}}
-            <div>
-                <p>{{ this.comment_text }}</p>
-                <p>Commented by: {{ this.User.username }}</p>
-            </div>
-        {{/each}}
-    </div>
+<!-- Display Comments -->
+<div>
+    <h2>Comments</h2>
+    {{#each post.comments}}
+        <div>
+            <p>{{ this.comment_text }}</p>
+            <p>Commented by: {{ this.User.username }}</p>
+        </div>
+    {{/each}}
+</div>
 
-    <!-- Form to Add a New Comment -->
-    <form id="commentForm" action="/posts/{{ post.id }}" method="POST">
-        <textarea id="commentText" name="commentText" placeholder="Add your comment"></textarea>
-        <input type="hidden" id="postId" name="postId" value="{{ post.id }}"> <!-- Add a hidden input for post ID -->
-        <button type="submit">Submit</button>
-    </form>
+<!-- Form to Add a New Comment -->
+<form id="commentForm" action="/posts/{{ post.id }}/comments" method="POST">
+    <textarea id="commentText" name="commentText" placeholder="Add your comment"></textarea>
+    <input type="hidden" id="postId" name="postId" value="{{ post.id }}">
+    <button type="submit">Submit</button>
+</form>
 
-    <!-- Include JavaScript file -->
-    <script src="/js/comment.js"></script>
+<!-- Edit and Delete Buttons (if user is logged in and is the author of the post) -->
+{{#if loggedIn}}
+  
+        <a href="/posts/{{ post.id }}/edit">Edit</a>
+        <form id="deleteForm" action="/posts/{{ post.id }}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete</button>
+        </form>
+    {{/if}}
+{{/if}}
+
+<!-- Include JavaScript file -->
+<script src="/js/comment.js"></script>

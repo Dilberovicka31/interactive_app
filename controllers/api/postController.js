@@ -12,20 +12,6 @@ router.get('/', async (req, res) => {
 }   
 );
 
-router.get('/:id', async (req, res) => {
-    try {
-        const postData = await Post.findByPk(req.params.id);
-        if (!postData) {
-            res.status(404).json({ message: 'No post found with this id!' });
-            return;
-        }
-        res.status(200).json(postData);
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-}   
-);
 
 router.post('/', async (req, res) => {
     console.log(req.body);
@@ -45,6 +31,20 @@ router.post('/', async (req, res) => {
 }   
 );
 
+router.get('/:id/edit', async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id);
+        if (!postData) {
+            res.status(404).json({ message: 'No post found with this id!' });
+            return;
+        }
+        const post = postData.get({ plain: true });
+        res.render('editPost', { post, loggedIn: req.session.logged_in });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 router.put('/:id', async (req, res) => {
     try {
         const postData = await Post.update(req.body, {
@@ -60,8 +60,7 @@ router.put('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-}   
-);
+});
 
 router.delete('/:id', async (req, res) => {
     try {
@@ -78,7 +77,6 @@ router.delete('/:id', async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-}   
-);
+});
 
 module.exports = router;

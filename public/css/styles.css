@@ -69,14 +69,25 @@ body {
       rgba(204, 200, 198, 0.5) 24%,
       rgba(251, 247, 246, 0.5) 100%
   ),
-  url("/images/pontus-wellgraf-7SwIRRHckds-unsplash.jpg");
+  url("/images/fabrizio-conti-UOIdyi9SV_I-unsplash.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+ 
 
  
 
 }
+@media (max-width: 767px) {
+  .carousel-text {
+    font-size: 10px; /* Decrease font size for better readability on small screens */
+    position: absolute; /* Position the text absolutely to overlay on the images */
+    /* bottom: 20px; /* Adjust the distance from the bottom */
+    /* left: 50%; Center the text horizontally */ 
+    transform: translateX(-50%); /* Center the text horizontally */
+  }
+}
+
 
 .carousel-text {
   position: absolute;
@@ -84,7 +95,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
-  color: white; /* Text color */
+  color: rgb(33, 27, 27); /* Text color */
 }
 
 /* Overlay container */
@@ -95,13 +106,19 @@ body {
 /* Set opacity for images */
 .carousel-item img {
   opacity: 0.7; 
-  border-radius: 10px;/* Adjust the opacity value as needed */
+  border-radius: 10px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  max-width: 100%;
+  height: auto;
+
 }
 .image-container {
   display: inline-block;
   border-radius: 10px; /* rounded corners to the image container */
   overflow: hidden; /*  Clips the shadow to the image container */
-  box-shadow: 0 0 20px #c7d8c6; 
+  box-shadow: 0 0 20px #D4B7A1; 
 }
 
 .steel{
@@ -109,7 +126,7 @@ body {
 
 }
 .minty{
-/* background-color: #c7d8c6; */
+background-color: #E2E2E1 !important;
 
 
 }
@@ -123,6 +140,7 @@ body {
   color: white;
 }
 .lead{
+  color: rgb(49, 21, 21);
   animation-name: flipInX;
   animation-duration: 2s;
 }
@@ -135,6 +153,26 @@ body {
     opacity: 1;
     transform: perspective(400px) rotateX(0deg);
   }
+}
+.lead1{
+  color: rgb(49, 21, 21);
+  animation-name: flipInX;
+  animation-duration: 6s;
+}
+@keyframes flipInX {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateX(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0deg);
+  }
+}
+
+
+.textColor{
+  color: rgb(49, 21, 21);
 }
 /*
 1. Add the correct height in Firefox.
