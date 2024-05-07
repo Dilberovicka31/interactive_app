@@ -57,12 +57,23 @@ html,
 
 body {
   font-family: roboto, sans-serif;
+  font-weight: 800;
   margin: 0;
   /* 1 */
   line-height: inherit;
   /* 2 */
-  background: rgb(118,117,116);
-background: linear-gradient(90deg, rgba(118,117,116,1) 0%, rgba(204,200,198,1) 24%, rgba(251,247,246,1) 100%);
+  background: rgb(118, 117, 116);
+  background: linear-gradient(
+      90deg,
+      rgba(118, 117, 116, 0.5) 0%,
+      rgba(204, 200, 198, 0.5) 24%,
+      rgba(251, 247, 246, 0.5) 100%
+  ),
+  url("/images/pontus-wellgraf-7SwIRRHckds-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
  
 
 }
@@ -98,7 +109,7 @@ background: linear-gradient(90deg, rgba(118,117,116,1) 0%, rgba(204,200,198,1) 2
 
 }
 .minty{
-
+/* background-color: #c7d8c6; */
 
 
 }
@@ -110,6 +121,20 @@ background: linear-gradient(90deg, rgba(118,117,116,1) 0%, rgba(204,200,198,1) 2
   transform: translateX(-50%);
   font-size: 24px; 
   color: white;
+}
+.lead{
+  animation-name: flipInX;
+  animation-duration: 2s;
+}
+@keyframes flipInX {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateX(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0deg);
+  }
 }
 /*
 1. Add the correct height in Firefox.
