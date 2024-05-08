@@ -57,7 +57,7 @@ html,
 
 body {
   font-family: roboto, sans-serif;
-  font-weight: 800;
+  font-weight: 300;
   margin: 0;
   /* 1 */
   line-height: inherit;
@@ -139,41 +139,23 @@ background-color: #E2E2E1 !important;
   font-size: 24px; 
   color: white;
 }
-.lead{
-  color: rgb(49, 21, 21);
-  animation-name: flipInX;
-  animation-duration: 2s;
-}
-@keyframes flipInX {
-  from {
-    opacity: 0;
-    transform: perspective(400px) rotateX(90deg);
-  }
-  to {
-    opacity: 1;
-    transform: perspective(400px) rotateX(0deg);
-  }
-}
-.lead1{
-  color: rgb(49, 21, 21);
-  animation-name: flipInX;
-  animation-duration: 6s;
-}
-@keyframes flipInX {
-  from {
-    opacity: 0;
-    transform: perspective(400px) rotateX(90deg);
-  }
-  to {
-    opacity: 1;
-    transform: perspective(400px) rotateX(0deg);
-  }
+.lead1 {
+  transform: scale(0);
+  animation: scaleIn 2s forwards;
 }
 
-
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 .textColor{
-  color: rgb(49, 21, 21);
+  color: rgb(56, 31, 31);
 }
+
 /*
 1. Add the correct height in Firefox.
 2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)

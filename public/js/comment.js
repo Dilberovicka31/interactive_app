@@ -1,3 +1,4 @@
+// public/js/comment.js
 const commentFormHandler = async (event) => {
     event.preventDefault();
 
@@ -9,12 +10,13 @@ const commentFormHandler = async (event) => {
         return;
     }
 
+
     try {
         const response = await fetch(`/api/comments`, {
             method: 'POST',
             body: JSON.stringify({
                 post_id: postId, // Pass the post ID along with the comment
-                comment_text: commentText,
+               content: commentText,
             }),
             headers: {
                 'Content-Type': 'application/json',
@@ -33,4 +35,4 @@ const commentFormHandler = async (event) => {
     }
 };
 
-document.querySelector('.commentBtn').addEventListener('submit', commentFormHandler);
+document.querySelector('#commentForm').addEventListener('submit', commentFormHandler);

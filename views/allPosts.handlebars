@@ -2,33 +2,35 @@
 <div class="d-flex justify-content-center">
   <div class="row">
     <a class="btn textColor" href="/dashboard/new">Add new post
-  
+
     </a>
-  <i class="bi bi-plus-lg"></i>
+    <i class="bi bi-plus-lg"></i>
   </div>
 
 </div>
 
-<div class="container text-center p-5 ">
+<div class="container text-center p-5">
   <div class="row justify-content-center">
     {{#each posts}}
-      <div class="col-md-6 mb-4 ">
-        <div class="card minty image-container" id="post-${id}" style="width: 100%; max-width: 500px; height: 300px;">
+      <div class="col-md-6 mb-4">
+        <div
+          class="card minty image-container"
+          id="post-${id}"
+          style="width: 100%; max-width: 500px; height: 300px;"
+        >
 
           <!-- Set fixed width and height -->
           <a href="/dashboard/edit/{{id}}"><i
-            class="fa-regular fa-pen-to-square position-absolute top-0 end-0 editBtn p-2"
-          ></i></a>
-          
-          <div
-            class="card-body"
-            style="overflow-y: auto; max-height: 200px;">
+              class="fa-regular fa-pen-to-square position-absolute top-0 end-0 editBtn p-2"
+            ></i></a>
+
+          <div class="card-body" style="overflow-y: auto; max-height: 200px;">
 
             <!-- Set max-height for scrolling -->
             <h5 class="card-title textColor postTitle">{{title}}</h5>
             <p class="card-text textColor postBody">{{body}}</p>
             <p class="card-text textColor">Posted by {{user.username}}</p>
-            
+
           </div>
           <i
             class="fa-regular fa-trash-can position-absolute bottom-0 end-0 mb-2 deleteBtn p-2"

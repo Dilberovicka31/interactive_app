@@ -1,4 +1,5 @@
 const editPostForm = document.getElementById('editPostForm');
+const deletePostButton = document.querySelector('.deleteBtn');
 const postId = window.location.pathname.split('/').pop(); // Get post ID from URL
 const editFormHandler = async (event) => {
   event.preventDefault();
@@ -29,7 +30,25 @@ const editFormHandler = async (event) => {
   }
 };
 
+const deletePostHandler = async () => {
+  try {
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      document.location.replace('/dashboard'); // Redirect to dashboard after successful delete
+    }
+  }
+  catch (error) {
+    console.error('Error deleting post:', error);
+    alert('Failed to delete post');
+  }
+}
+
+
 if (editPostForm) {
   editPostForm.addEventListener('submit', editFormHandler);
 }
+deletePostButton.addEventListener('click', deletePostHandler);
 
